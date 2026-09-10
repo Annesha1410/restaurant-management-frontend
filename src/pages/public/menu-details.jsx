@@ -68,16 +68,11 @@ const MenuItems = () => {
 
                         <p className="mt-2 text-gray-700">
                             {item.availability
-                                ? "In Stock"
+                                ? "Available"
                                 : "Out of Stock"}
                         </p>
 
-                        <Link
-                            to={`/admin/edit-menu-item/${item._id}`}
-                            className="inline-block mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                        >
-                            Edit
-                        </Link>
+                       
 
                     </div>
 
