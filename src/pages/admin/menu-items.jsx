@@ -13,7 +13,7 @@ const MenuItems = () => {
         try {
 
             const response = await axios.get(
-                "http://localhost:5000/api/menu-items"
+              "https://https-github-com-yourusername-restaurant.onrender.com/api/auth/register"
             );
 
             setMenu(response.data.data);
