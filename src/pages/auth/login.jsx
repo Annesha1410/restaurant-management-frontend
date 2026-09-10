@@ -26,6 +26,9 @@ const Login = () => {
 
       console.log(response.data);
 
+      Cookies.set("token", response.data.token);
+Cookies.set("role", response.data.data.role);
+
       setMessage(response.data.message);
     } catch (error) {
       setError(error.response?.data?.message || "Login failed");

@@ -12,3 +12,5 @@ const AdminProtected = () => {
 };
 
 export default AdminProtected;
+
+
