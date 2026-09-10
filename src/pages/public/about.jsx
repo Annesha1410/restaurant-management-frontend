@@ -1,57 +1,100 @@
+
 const About = () => {
     return (
         <div
-            className="min-h-screen py-20 px-5"
+            className="min-h-screen px-6 py-16"
             style={{
                 background:
-                    "linear-gradient(to right, #fed7aa, #fecdd3, #fbcfe8)"
+                    "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
             }}
         >
 
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-4xl mx-auto">
 
-                <h1 className="text-4xl font-bold text-rose-600">
-                    About Restaurant
-                </h1>
+                {/* Heading */}
+                <div className="text-center mb-12">
 
-                <p className="text-gray-700 text-lg mt-6">
-                    Welcome to Restaurant, your favorite place for
-                    delicious and freshly prepared food.
-                </p>
+                    <h1 className="text-4xl font-bold text-blue-800">
+                        About Swad House
+                    </h1>
 
-                <p className="text-gray-700 mt-4">
-                    We believe that good food brings people together.
-                    Our restaurant offers tasty dishes made with
-                    fresh ingredients and lots of love.
-                </p>
+                    <p className="text-gray-600 mt-4 text-lg">
+                        A place where delicious food meets a warm atmosphere.
+                    </p>
 
-                <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                </div>
 
-                    <div className="bg-white/80 p-6 rounded-xl shadow">
-                        <h2 className="text-xl font-bold text-rose-500">
-                            Fresh Food
-                        </h2>
-                        <p className="mt-2 text-gray-600">
-                            Fresh and quality ingredients.
-                        </p>
-                    </div>
 
-                    <div className="bg-white/80 p-6 rounded-xl shadow"> 
-                        <h2 className="text-xl font-bold text-rose-500">
-                            Great Taste
-                        </h2>
-                        <p className="mt-2 text-gray-600">
-                            Delicious food made with care.
-                        </p>
-                    </div>
+                {/* Our Story */}
+                <div className="bg-white/90 p-8 rounded-2xl shadow-lg border border-blue-100 mb-8">
 
-                    <div className="bg-white/80 p-6 rounded-xl shadow">
-                        <h2 className="text-xl font-bold text-rose-500">
-                            Happy Customers
-                        </h2>
-                        <p className="mt-2 text-gray-600">
-                            Your happiness is our priority.
-                        </p>
+                    <h2 className="text-2xl font-bold text-blue-700 mb-4">
+                        Our Story
+                    </h2>
+
+                    <p className="text-gray-700 leading-7">
+                        Swad House was created with a simple idea — to serve
+                        delicious food that brings people together. We prepare
+                        every dish with fresh ingredients and careful attention
+                        to taste and quality.
+                    </p>
+
+                </div>
+
+
+                {/* Our Mission */}
+                <div className="bg-white/90 p-8 rounded-2xl shadow-lg border border-blue-100 mb-8">
+
+                    <h2 className="text-2xl font-bold text-blue-700 mb-4">
+                        Our Mission
+                    </h2>
+
+                    <p className="text-gray-700 leading-7">
+                        Our mission is to provide tasty, fresh and enjoyable
+                        meals while making every visit a pleasant experience
+                        for our customers.
+                    </p>
+
+                </div>
+
+
+                {/* What We Serve */}
+                <div className="bg-white/90 p-8 rounded-2xl shadow-lg border border-blue-100">
+
+                    <h2 className="text-2xl font-bold text-blue-700 mb-6 text-center">
+                        What We Serve
+                    </h2>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                        <div className="text-center p-4 bg-blue-50 rounded-lg">
+                            <p className="text-2xl">🥗</p>
+                            <p className="text-blue-700 font-semibold mt-2">
+                                Starters
+                            </p>
+                        </div>
+
+                        <div className="text-center p-4 bg-blue-50 rounded-lg">
+                            <p className="text-2xl">🍛</p>
+                            <p className="text-blue-700 font-semibold mt-2">
+                                Main Course
+                            </p>
+                        </div>
+
+                        <div className="text-center p-4 bg-blue-50 rounded-lg">
+                            <p className="text-2xl">🍰</p>
+                            <p className="text-blue-700 font-semibold mt-2">
+                                Desserts
+                            </p>
+                        </div>
+
+                        <div className="text-center p-4 bg-blue-50 rounded-lg">
+                            <p className="text-2xl">🥤</p>
+                            <p className="text-blue-700 font-semibold mt-2">
+                                Beverages
+                            </p>
+                        </div>
+
                     </div>
 
                 </div>
@@ -63,3 +106,4 @@ const About = () => {
 };
 
 export default About;
+

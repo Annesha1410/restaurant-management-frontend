@@ -20,12 +20,12 @@ const Menu = () => {
 
     return (
         <div
-            className="min-h-screen p-10"
-            style={{
-                background:
-                    "linear-gradient(to right, #fed7aa, #fecdd3, #fbcfe8)"
-            }}
-        >
+    className="min-h-screen"
+    style={{
+        background:
+            "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
+    }}
+>
 
             <h1 className="text-4xl font-bold text-center mb-10">
                 Our Menu

@@ -31,13 +31,13 @@ const MenuDetails = () => {
     }
 
     return (
-        <div
-            className="min-h-screen flex justify-center items-center p-10"
-            style={{
-                background:
-                    "linear-gradient(to right, #fed7aa, #fecdd3, #fbcfe8)"
-            }}
-        >
+      <div
+    className="min-h-screen"
+    style={{
+        background:
+            "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
+    }}
+>
 
             <div className="bg-white rounded-xl shadow-lg p-8 w-96">
 

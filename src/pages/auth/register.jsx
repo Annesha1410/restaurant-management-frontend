@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import axios from "axios";
 
@@ -51,29 +52,40 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen bg-orange-100 flex justify-center items-center">
+        <div
+            className="min-h-screen flex justify-center items-center px-4"
+            style={{
+                background:
+                    "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
+            }}
+        >
 
-            <div className="bg-white p-8 rounded-xl shadow-md w-96">
+            <div className="bg-white/95 p-8 rounded-2xl shadow-xl w-96 border border-blue-200">
 
-                <h1 className="text-3xl font-bold text-center text-rose-600">
-                    Register
+                <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">
+                    Create Account
                 </h1>
 
+                <p className="text-center text-gray-500 mb-6">
+                    Register for TastyBites
+                </p>
+
                 {message && (
-                    <p className="text-green-600 text-center mt-4">
+                    <p className="text-green-600 text-center mb-4">
                         {message}
                     </p>
                 )}
 
                 {error && (
-                    <p className="text-red-500 text-center mt-4">
+                    <p className="text-red-500 text-center mb-4">
                         {error}
                     </p>
                 )}
 
-                <form onSubmit={handleRegister} className="mt-8">
+                <form onSubmit={handleRegister}>
 
-                    <label className="block text-gray-700 mb-2">
+                    {/* Name */}
+                    <label className="block text-gray-700 font-medium mb-2">
                         Name
                     </label>
 
@@ -82,11 +94,12 @@ const Register = () => {
                         placeholder="Enter your name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-5"
+                        className="w-full border border-blue-200 rounded-lg px-4 py-3 mb-5 focus:outline-none focus:ring-2 focus:ring-blue-300"
                         required
                     />
 
-                    <label className="block text-gray-700 mb-2">
+                    {/* Email */}
+                    <label className="block text-gray-700 font-medium mb-2">
                         Email
                     </label>
 
@@ -95,11 +108,12 @@ const Register = () => {
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-5"
+                        className="w-full border border-blue-200 rounded-lg px-4 py-3 mb-5 focus:outline-none focus:ring-2 focus:ring-blue-300"
                         required
                     />
 
-                    <label className="block text-gray-700 mb-2">
+                    {/* Password */}
+                    <label className="block text-gray-700 font-medium mb-2">
                         Password
                     </label>
 
@@ -108,11 +122,12 @@ const Register = () => {
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-5"
+                        className="w-full border border-blue-200 rounded-lg px-4 py-3 mb-5 focus:outline-none focus:ring-2 focus:ring-blue-300"
                         required
                     />
 
-                    <label className="block text-gray-700 mb-2">
+                    {/* Confirm Password */}
+                    <label className="block text-gray-700 font-medium mb-2">
                         Confirm Password
                     </label>
 
@@ -121,13 +136,14 @@ const Register = () => {
                         placeholder="Confirm your password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-6"
+                        className="w-full border border-blue-200 rounded-lg px-4 py-3 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-300"
                         required
                     />
 
+                    {/* Register Button */}
                     <button
                         type="submit"
-                        className="w-full bg-rose-400 text-white py-2 rounded-lg hover:bg-rose-500"
+                        className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition"
                     >
                         Register
                     </button>
@@ -141,3 +157,4 @@ const Register = () => {
 };
 
 export default Register;
+
