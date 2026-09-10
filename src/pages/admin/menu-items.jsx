@@ -1,19 +1,16 @@
+
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-
-
 
 const MenuItems = () => {
 
     const [menu, setMenu] = useState([]);
 
     const getMenu = async () => {
-
         try {
 
             const response = await axios.get(
-              "https://https-github-com-yourusername-restaurant.onrender.com/api/auth/register"
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items"
             );
 
             setMenu(response.data.data);
@@ -32,11 +29,11 @@ const MenuItems = () => {
             className="min-h-screen p-10"
             style={{
                 background:
-                    "linear-gradient(to right, #fed7aa, #fecdd3, #fbcfe8)"
+                    "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
             }}
         >
 
-            <h1 className="text-4xl font-bold text-center text-rose-600 mb-10">
+            <h1 className="text-4xl font-bold text-center text-blue-800 mb-10">
                 Menu Items
             </h1>
 
@@ -46,39 +43,32 @@ const MenuItems = () => {
 
                     <div
                         key={item._id}
-                        className="bg-white p-5 rounded-xl shadow"
+                        className="bg-white/95 p-5 rounded-xl shadow-lg border border-blue-100"
                     >
 
                         <img
                             src={item.image?.url}
                             alt={item.name}
-                            className="w-full h-40 object-cover rounded"
+                            className="w-full h-40 object-cover rounded-lg"
                         />
 
-                        <h2 className="text-xl font-bold mt-4">
+                        <h2 className="text-xl font-bold text-blue-700 mt-4">
                             {item.name}
                         </h2>
 
-                        <p className="mt-2">
+                        <p className="mt-2 text-gray-600">
                             {item.desc}
                         </p>
 
-                        <p className="font-bold mt-2">
+                        <p className="font-bold text-blue-600 mt-2">
                             ₹{item.price}
                         </p>
 
-                        <p className="mt-2">
+                        <p className="mt-2 text-gray-700">
                             {item.availability
-                                ? "In Stock"
+                                ? "Available"
                                 : "Out of Stock"}
                         </p>
-
-                        <Link
-                            to={`/admin/edit-menu-item/${item._id}`}
-                            className="inline-block mt-4 bg-rose-400 text-white px-4 py-2 rounded"
-                        >
-                            Edit
-                        </Link>
 
                     </div>
 
@@ -91,3 +81,4 @@ const MenuItems = () => {
 };
 
 export default MenuItems;
+

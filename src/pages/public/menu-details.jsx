@@ -1,21 +1,22 @@
 
-
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-const MenuItems = () => {
+const MenuDetails = () => {
 
-    const [menu, setMenu] = useState([]);
+    const { id } = useParams();
 
-    const getMenu = async () => {
+    const [menuItem, setMenuItem] = useState(null);
+
+    const getMenuItem = async () => {
         try {
 
             const response = await axios.get(
-                "https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items"
+                `https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items/${id}`
             );
 
-            setMenu(response.data.data);
+            setMenuItem(response.data.data);
 
         } catch (error) {
             console.log(error);
@@ -23,65 +24,55 @@ const MenuItems = () => {
     };
 
     useEffect(() => {
-        getMenu();
-    }, []);
+        getMenuItem();
+    }, [id]);
+
+    if (!menuItem) {
+        return (
+            <p className="text-center mt-10">
+                Loading...
+            </p>
+        );
+    }
 
     return (
         <div
-            className="min-h-screen p-10"
+            className="min-h-screen flex justify-center items-center px-4"
             style={{
                 background:
                     "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
             }}
         >
 
-            <h1 className="text-4xl font-bold text-center text-blue-800 mb-10">
-                Menu Items
-            </h1>
+            <div className="bg-white rounded-xl shadow-lg p-8 w-96 border border-blue-100">
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <img
+                    src={menuItem.image?.url}
+                    alt={menuItem.name}
+                    className="w-full h-48 object-cover rounded-lg"
+                />
 
-                {menu.map((item) => (
+                <h1 className="text-3xl font-bold text-blue-700 mt-5">
+                    {menuItem.name}
+                </h1>
 
-                    <div
-                        key={item._id}
-                        className="bg-white/95 p-5 rounded-xl shadow-lg border border-blue-100"
-                    >
+                <p className="text-gray-600 mt-3">
+                    {menuItem.desc}
+                </p>
 
-                        <img
-                            src={item.image?.url}
-                            alt={item.name}
-                            className="w-full h-40 object-cover rounded-lg"
-                        />
+                <p className="text-gray-700 mt-3">
+                    Category: {menuItem.category}
+                </p>
 
-                        <h2 className="text-xl font-bold text-blue-700 mt-4">
-                            {item.name}
-                        </h2>
+                <p className="text-xl font-bold text-blue-600 mt-3">
+                    ₹{menuItem.price}
+                </p>
 
-                        <p className="mt-2 text-gray-600">
-                            {item.desc}
-                        </p>
-
-                        <p className="font-bold text-blue-600 mt-2">
-                            ₹{item.price}
-                        </p>
-
-                        <p className="mt-2 text-gray-700">
-                            {item.availability
-                                ? "Available"
-                                : "Out of Stock"}
-                        </p>
-
-                        <Link
-                            to={`/menu/${item._id}`}
-                            className="inline-block mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                        >
-                            View Details
-                        </Link>
-
-                    </div>
-
-                ))}
+                <p className="text-gray-700 mt-3">
+                    {menuItem.availability
+                        ? "Available"
+                        : "Out of Stock"}
+                </p>
 
             </div>
 
@@ -89,5 +80,7 @@ const MenuItems = () => {
     );
 };
 
-export default MenuItems;
+export default MenuDetails;
+
+
 
