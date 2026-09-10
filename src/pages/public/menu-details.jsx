@@ -1,4 +1,5 @@
 
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -8,7 +9,6 @@ const MenuItems = () => {
     const [menu, setMenu] = useState([]);
 
     const getMenu = async () => {
-
         try {
 
             const response = await axios.get(
@@ -72,7 +72,12 @@ const MenuItems = () => {
                                 : "Out of Stock"}
                         </p>
 
-                       
+                        <Link
+                            to={`/menu/${item._id}`}
+                            className="inline-block mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                        >
+                            View Details
+                        </Link>
 
                     </div>
 
