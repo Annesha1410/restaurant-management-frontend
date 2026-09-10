@@ -7,11 +7,18 @@ const Menu = () => {
     const [menu, setMenu] = useState([]);
 
     const getMenu = async () => {
-        const response = await axios.get(
-            "https://https-github-com-YourUsername-restaurant.onrender.com/api/menu-items"
-        );
 
-        setMenu(response.data.data);
+        try {
+
+            const response = await axios.get(
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items"
+            );
+
+            setMenu(response.data.data);
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -20,14 +27,14 @@ const Menu = () => {
 
     return (
         <div
-    className="min-h-screen"
-    style={{
-        background:
-            "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
-    }}
->
+            className="min-h-screen p-10"
+            style={{
+                background:
+                    "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
+            }}
+        >
 
-            <h1 className="text-4xl font-bold text-center mb-10">
+            <h1 className="text-4xl font-bold text-center text-blue-800 mb-10">
                 Our Menu
             </h1>
 
@@ -37,31 +44,32 @@ const Menu = () => {
 
                     <div
                         key={item._id}
-                        className="bg-white p-5 rounded-lg shadow"
+                        className="bg-white/95 p-5 rounded-xl shadow-lg border border-blue-100"
                     >
 
                         <img
                             src={item.image?.url}
-                            className="w-full h-40 object-cover rounded"
+                            alt={item.name}
+                            className="w-full h-40 object-cover rounded-lg"
                         />
 
-                        <h2 className="text-xl font-bold mt-4">
+                        <h2 className="text-xl font-bold text-blue-700 mt-4">
                             {item.name}
                         </h2>
 
-                        <p className="mt-2">
+                        <p className="text-gray-600 mt-2">
                             {item.desc}
                         </p>
 
-                        <p className="font-bold mt-2">
+                        <p className="font-bold text-blue-600 mt-2">
                             ₹{item.price}
                         </p>
 
                         <Link
                             to={`/menu/${item._id}`}
-                            className="inline-block mt-4 bg-pink-500 text-white px-4 py-2 rounded"
+                            className="inline-block mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
                         >
-                            View
+                            View Details
                         </Link>
 
                     </div>
@@ -75,3 +83,4 @@ const Menu = () => {
 };
 
 export default Menu;
+

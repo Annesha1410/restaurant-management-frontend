@@ -1,21 +1,21 @@
+
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const MenuDetails = () => {
+const MenuItems = () => {
 
-    const { id } = useParams();
+    const [menu, setMenu] = useState([]);
 
-    const [menuItem, setMenuItem] = useState(null);
+    const getMenu = async () => {
 
-    const getMenuItem = async () => {
         try {
 
             const response = await axios.get(
-                `https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items/${id}`
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items"
             );
 
-            setMenuItem(response.data.data);
+            setMenu(response.data.data);
 
         } catch (error) {
             console.log(error);
@@ -23,51 +23,65 @@ const MenuDetails = () => {
     };
 
     useEffect(() => {
-        getMenuItem();
-    }, [id]);
-
-    if (!menuItem) {
-        return <p className="text-center mt-10">Loading...</p>;
-    }
+        getMenu();
+    }, []);
 
     return (
-      <div
-    className="min-h-screen"
-    style={{
-        background:
-            "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
-    }}
->
+        <div
+            className="min-h-screen p-10"
+            style={{
+                background:
+                    "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
+            }}
+        >
 
-            <div className="bg-white rounded-xl shadow-lg p-8 w-96">
+            <h1 className="text-4xl font-bold text-center text-blue-800 mb-10">
+                Menu Items
+            </h1>
 
-                <img
-                    src={menuItem.image?.url}
-                    alt={menuItem.name}
-                    className="w-full h-48 object-cover rounded-lg"
-                />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <h1 className="text-3xl font-bold text-rose-600 mt-5">
-                    {menuItem.name}
-                </h1>
+                {menu.map((item) => (
 
-                <p className="text-gray-600 mt-3">
-                    {menuItem.desc}
-                </p>
+                    <div
+                        key={item._id}
+                        className="bg-white/95 p-5 rounded-xl shadow-lg border border-blue-100"
+                    >
 
-                <p className="mt-3">
-                    Category: {menuItem.category}
-                </p>
+                        <img
+                            src={item.image?.url}
+                            alt={item.name}
+                            className="w-full h-40 object-cover rounded-lg"
+                        />
 
-                <p className="text-xl font-bold text-rose-600 mt-3">
-                    ₹{menuItem.price}
-                </p>
+                        <h2 className="text-xl font-bold text-blue-700 mt-4">
+                            {item.name}
+                        </h2>
 
-                <p className="mt-3">
-                    {menuItem.availability
-                        ? "In Stock"
-                        : "Out of Stock"}
-                </p>
+                        <p className="mt-2 text-gray-600">
+                            {item.desc}
+                        </p>
+
+                        <p className="font-bold text-blue-600 mt-2">
+                            ₹{item.price}
+                        </p>
+
+                        <p className="mt-2 text-gray-700">
+                            {item.availability
+                                ? "In Stock"
+                                : "Out of Stock"}
+                        </p>
+
+                        <Link
+                            to={`/admin/edit-menu-item/${item._id}`}
+                            className="inline-block mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                        >
+                            Edit
+                        </Link>
+
+                    </div>
+
+                ))}
 
             </div>
 
@@ -75,4 +89,5 @@ const MenuDetails = () => {
     );
 };
 
-export default MenuDetails;
+export default MenuItems;
+
