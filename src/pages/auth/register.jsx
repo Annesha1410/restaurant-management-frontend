@@ -25,7 +25,7 @@ const Register = () => {
         try {
 
             const response = await axios.post(
-                "http://localhost:5000/api/auth/register",
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/auth/register",
                 {
                     name,
                     email,
