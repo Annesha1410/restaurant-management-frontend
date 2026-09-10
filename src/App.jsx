@@ -88,15 +88,8 @@ function App() {
                         element={<MenuItems />}
                     />
 
-                    <Route
-                        path="/admin/add-menu-item"
-                        element={<AddMenuItem />}
-                    />
+                    
 
-                    <Route
-                        path="/admin/edit-menu-item/:id"
-                        element={<EditMenuItem />}
-                    />
 
                     <Route
                         path="/admin/users"
