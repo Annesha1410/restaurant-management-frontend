@@ -67,7 +67,7 @@ const Register = () => {
                 </h1>
 
                 <p className="text-center text-gray-500 mb-6">
-                    Register for TastyBites
+                    Register for Swad House
                 </p>
 
                 {message && (
