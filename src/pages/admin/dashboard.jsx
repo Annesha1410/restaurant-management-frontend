@@ -16,7 +16,7 @@ const Dashboard = () => {
         try {
 
             const response = await axios.get(
-                "http://localhost:5000/api/menu-items"
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items"
             );
 
             const menuItems = response.data.data;
@@ -45,7 +45,7 @@ const Dashboard = () => {
             const token = Cookies.get("token");
 
             const response = await axios.get(
-                "http://localhost:5000/api/users",
+               "https://https-github-com-yourusername-restaurant.onrender.com/api/users",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -71,7 +71,7 @@ const Dashboard = () => {
             const token = Cookies.get("token");
 
             const response = await axios.get(
-                "http://localhost:5000/api/orders",
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/orders",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`

@@ -41,7 +41,7 @@ const Order = () => {
         try {
 
             await axios.post(
-                "http://localhost:5000/api/orders",
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/orders",
                 {
                     customerName,
                     customerEmail,

@@ -14,7 +14,7 @@ const MenuItems = () => {
     const getMenuItems = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:5000/api/menu-items"
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items"
             );
 
             setMenuItems(response.data.data);
@@ -42,7 +42,7 @@ const MenuItems = () => {
             const token = Cookies.get("token");
 
             await axios.delete(
-                `http://localhost:5000/api/menu-items/${id}`,
+                `https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -70,7 +70,7 @@ const MenuItems = () => {
             const token = Cookies.get("token");
 
             await axios.put(
-                `http://localhost:5000/api/menu-items/${id}`,
+                `https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items/${id}`,
                 {
                     available: !currentStatus
                 },

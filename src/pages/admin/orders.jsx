@@ -13,7 +13,7 @@ const Orders = () => {
             const token = Cookies.get("token");
 
             const response = await axios.get(
-                "http://localhost:5000/api/orders",
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/orders",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -47,7 +47,7 @@ const Orders = () => {
             const token = Cookies.get("token");
 
             await axios.put(
-                `http://localhost:5000/api/orders/${id}`,
+                `https://https-github-com-yourusername-restaurant.onrender.com/api/orders/${id}`,
                 {
                     status
                 },
@@ -87,7 +87,7 @@ const Orders = () => {
             const token = Cookies.get("token");
 
             await axios.delete(
-                `http://localhost:5000/api/orders/${id}`,
+                `https://https-github-com-yourusername-restaurant.onrender.com/api/orders/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`

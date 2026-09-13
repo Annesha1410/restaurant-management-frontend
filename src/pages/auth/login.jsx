@@ -18,7 +18,22 @@ const Login = () => {
         try {
 
             const response = await axios.post(
-                "http://localhost:5000/api/auth/login",
+                "
+    const handleLogin = async (e) => {
+
+        e.preventDefault();
+
+        try {
+
+            const response = await axios.post(
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/auth/login",
+                {
+                    email,
+                    password
+                }
+            );
+
+            console.log(response.data);",
                 {
                     email: email,
                     password: password

@@ -17,7 +17,7 @@ const MenuDetails = () => {
         try {
 
             const response = await axios.get(
-                `http://localhost:5000/api/menu-items/${id}`
+                `https://https-github-com-yourusername-restaurant.onrender.com/api/menu-items/${id}`
             );
 
             setItem(response.data.data);
