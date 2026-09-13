@@ -1,118 +1,109 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    setMessage("");
-    setError("");
+    const handleSubmit = async (e) => {
 
-    try {
-      const response = await axios.post(
-        "https://https-github-com-yourusername-restaurant.onrender.com/api/auth/login",
-        {
-          email,
-          password,
+        e.preventDefault();
+
+        try {
+
+            const response = await axios.post(
+                "http://localhost:5000/api/auth/login",
+                {
+                    email: email,
+                    password: password
+                }
+            );
+
+            console.log(response.data);
+
+            // Get data from backend
+            const token = response.data.token;
+            const name = response.data.data.name;
+            const role = response.data.data.role;
+
+            // Save login information
+            Cookies.set("token", token);
+            Cookies.set("name", name);
+            Cookies.set("role", role);
+
+            alert("Login successful");
+
+            // Normal user goes to Home
+            navigate("/");
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert(
+                error.response?.data?.message ||
+                "Login failed"
+            );
         }
-      );
+    };
 
-      console.log(response.data);
+    return (
+        <div className="min-h-screen bg-[#f7f5ef] px-6 py-16">
 
-      Cookies.set("token", response.data.token);
-      Cookies.set("role", response.data.data.role);
+            <div className="mx-auto max-w-md">
 
-      setMessage(response.data.message);
-    } catch (error) {
-      setError(error.response?.data?.message || "Login failed");
-    }
-  };
+                <h1 className="mb-8 text-center text-4xl font-bold text-[#354936]">
+                    Login
+                </h1>
 
-  return (
-    <div
-      className="min-h-screen flex justify-center items-center px-4"
-      style={{
-        background:
-          "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)",
-      }}
-    >
-      <div className="bg-white/95 p-8 rounded-2xl shadow-xl w-96 border border-blue-200">
+                <div className="rounded-3xl border border-[#ddd8ca] bg-[#fffdf8] p-8">
 
-        {/* Heading */}
-        <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">
-          Welcome Back
-        </h1>
+                    <form
+                        onSubmit={handleSubmit}
+                        className="space-y-5"
+                    >
 
-        <p className="text-center text-gray-500 mb-6">
-          Login to your account
-        </p>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="w-full rounded-xl border border-[#ddd8ca] bg-[#f7f5ef] px-4 py-3 outline-none"
+                        />
 
-        {/* Success Message */}
-        {message && (
-          <p className="text-green-600 text-center mb-4">
-            {message}
-          </p>
-        )}
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="w-full rounded-xl border border-[#ddd8ca] bg-[#f7f5ef] px-4 py-3 outline-none"
+                        />
 
-        {/* Error Message */}
-        {error && (
-          <p className="text-red-500 text-center mb-4">
-            {error}
-          </p>
-        )}
+                        <button
+                            type="submit"
+                            className="w-full rounded-full bg-[#354936] px-6 py-3 font-medium text-white hover:bg-[#26352a]"
+                        >
+                            Login
+                        </button>
 
-        <form onSubmit={handleLogin}>
+                    </form>
 
-          {/* Email */}
-          <label className="block text-gray-700 font-medium mb-2">
-            Email
-          </label>
+                </div>
 
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-blue-200 rounded-lg px-4 py-3 mb-5 focus:outline-none focus:ring-2 focus:ring-blue-300"
-            required
-          />
+            </div>
 
-          {/* Password */}
-          <label className="block text-gray-700 font-medium mb-2">
-            Password
-          </label>
-
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-blue-200 rounded-lg px-4 py-3 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-300"
-            required
-          />
-
-          {/* Login Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition"
-          >
-            Login
-          </button>
-
-        </form>
-
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default Login;
+
 

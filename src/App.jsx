@@ -1,29 +1,34 @@
 
 
 
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import AdminProtected from "./components/adminprotected";
 
+// Public pages
 import Home from "./pages/public/home";
 import Menu from "./pages/public/menu";
 import MenuDetails from "./pages/public/menu-details";
 import About from "./pages/public/about";
 import Contact from "./pages/public/contact";
+import Order from "./pages/public/order";
 
+// Auth pages
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import AdminLogin from "./pages/auth/admin";
 
+// Admin pages
 import Dashboard from "./pages/admin/dashboard";
 import MenuItems from "./pages/admin/menu-items";
-
+import AddMenuItem from "./pages/admin/add-menu";
+import EditMenuItem from "./pages/admin/edit-menu";
 import Users from "./pages/admin/users";
-
+import Orders from "./pages/admin/orders";
 
 function App() {
-
     return (
         <BrowserRouter>
 
@@ -31,7 +36,7 @@ function App() {
 
             <Routes>
 
-                {/* Public Pages */}
+                {/* ================= PUBLIC ================= */}
 
                 <Route
                     path="/"
@@ -49,21 +54,6 @@ function App() {
                 />
 
                 <Route
-                    path="/login"
-                    element={<Login />}
-                />
-
-                <Route
-                    path="/register"
-                    element={<Register />}
-                />
-
-                <Route
-                    path="/admin-login"
-                    element={<AdminLogin />}
-                />
-
-                <Route
                     path="/about"
                     element={<About />}
                 />
@@ -73,8 +63,34 @@ function App() {
                     element={<Contact />}
                 />
 
+                <Route
+                    path="/order"
+                    element={<Order />}
+                />
 
-                {/* Admin Pages */}
+
+                {/* ================= USER AUTH ================= */}
+
+                <Route
+                    path="/login"
+                    element={<Login />}
+                />
+
+                <Route
+                    path="/register"
+                    element={<Register />}
+                />
+
+
+                {/* ================= ADMIN LOGIN ================= */}
+
+                <Route
+                    path="/admin-login"
+                    element={<AdminLogin />}
+                />
+
+
+                {/* ================= ADMIN PROTECTED ================= */}
 
                 <Route element={<AdminProtected />}>
 
@@ -88,8 +104,20 @@ function App() {
                         element={<MenuItems />}
                     />
 
-                    
+                    <Route
+                        path="/admin/menu-items/add"
+                        element={<AddMenuItem />}
+                    />
 
+                    <Route
+                        path="/admin/menu-items/edit/:id"
+                        element={<EditMenuItem />}
+                    />
+
+                    <Route
+                        path="/admin/orders"
+                        element={<Orders />}
+                    />
 
                     <Route
                         path="/admin/users"

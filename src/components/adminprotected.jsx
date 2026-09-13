@@ -1,14 +1,20 @@
-import React from "react";
+
 import { Navigate, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const AdminProtected = () => {
+
     const token = Cookies.get("token");
     const role = Cookies.get("role");
 
-    const isAuth = token && role === "admin";
+    console.log("Protected Token:", token);
+    console.log("Protected Role:", role);
 
-    return isAuth ? <Outlet /> : <Navigate to="/login" />;
+    if (!token || role !== "admin") {
+        return <Navigate to="/admin-login" />;
+    }
+
+    return <Outlet />;
 };
 
 export default AdminProtected;

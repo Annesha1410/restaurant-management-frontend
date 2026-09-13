@@ -1,166 +1,86 @@
 
-
-
-// // import { Link } from "react-router-dom";
-
-// // const Navbar = () => {
-// //     return (
-// //         <nav className="bg-pink-100 shadow-sm px-8 py-4">
-
-// //             <div className="max-w-6xl mx-auto flex justify-between items-center">
-
-// //                 <Link
-// //                     to="/"
-// //                     className="text-2xl font-bold text-rose-600"
-// //                 >
-// //                   RESTAURANT
-// //                 </Link>
-
-// //                 <div className="flex gap-8">
-
-
-// //                     <Link to="/about" className="text-gray-700 font-medium hover:text-rose-500">
-// //                         About
-// //                     </Link>
-
-// //                     <Link to="/contact" className="text-gray-700 font-medium hover:text-rose-500">
-// //                         Contact Us
-// //                     </Link>
-
-// //                     <Link to="/login" className="text-gray-700 font-medium hover:text-rose-500">
-// //                         Login
-// //                     </Link>
-
-// //                     <Link to="/register" className="text-gray-700 font-medium hover:text-rose-500">
-// //                         Register
-// //                     </Link>
-
-// //                 </div>
-
-// //             </div>
-
-// //         </nav>
-// //     );
-// // };
-
-// // export default Navbar;
-
-
-
-// import { Link } from "react-router-dom";
-
-// const Navbar = () => {
-//     return (
-//         <nav
-//             className="px-8 py-4 shadow-md"
-//             style={{
-//                 background:
-//                     "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
-//             }}
-//         >
-
-//             <div className="max-w-7xl mx-auto flex justify-between items-center">
-
-//                 <Link
-//                     to="/"
-//                     className="text-2xl font-bold text-blue-700"
-//                 >
-//                     SWAD HOUSE
-//                 </Link>
-
-//                 <div className="flex gap-6 items-center">
-
-//                     <Link to="/" className="text-gray-700 hover:text-blue-600">
-//                         Home
-//                     </Link>
-
-//                     <Link to="/register" className="text-gray-700 hover:text-blue-600"
-//                     > Register 
-//                     </Link>
-
-                  
-
-//                     <Link to="/about" className="text-gray-700 hover:text-blue-600">
-//                         About
-//                     </Link>
-
-//                     <Link to="/contact" className="text-gray-700 hover:text-blue-600">
-//                         Contact
-//                     </Link>
-
-//                     <Link
-//                         to="/login"
-//                         className=" text-grey-700  hover:bg-blue-600"
-//                     >
-//                         Login
-//                     </Link>
-
-//                 </div>
-
-//             </div>
-
-//         </nav>
-//     );
-// };
-
-// export default Navbar;
-
-
-
-
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
+
+    const navigate = useNavigate();
+
+    const token = Cookies.get("token");
+    const name = Cookies.get("name");
+
+    const handleLogout = () => {
+        Cookies.remove("token");
+        Cookies.remove("name");
+        Cookies.remove("role");
+
+        navigate("/");
+    };
+
     return (
-        <nav
-            className="px-8 py-4 shadow-md"
-            style={{
-                background:
-                    "linear-gradient(135deg, #eff6ff, #dbeafe, #bfdbfe, #bae6fd)"
-            }}
-        >
+        <nav className="sticky top-0 z-50 border-b border-[#ddd8ca] bg-[#f7f5ef]">
 
-            <div className="max-w-7xl mx-auto flex justify-center items-center">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
 
-                {/* Navigation Links */}
-                <div className="flex gap-8 items-center">
+                {/* Logo */}
+                <Link
+                     to="/"
+    className="logo-font text-3xl font-semibold tracking-wide text-[#354936]"
+                >
+                  Swad House
+                </Link>
+
+                {/* Navigation */}
+                <div className="flex items-center gap-7">
 
                     <Link
                         to="/"
-                        className="text-gray-700 hover:text-blue-600 transition"
+                        className="rounded-full border border-[#354936] px-5 py-2 font-medium text-[#354936] hover:bg-[#354936] hover:text-white"
                     >
                         Home
                     </Link>
 
-            
-                    <Link
-                        to="/about"
-                        className="text-gray-700 hover:text-blue-600 transition"
-                    >
-                        About
-                    </Link>
+                
 
-                    <Link
-                        to="/contact"
-                        className="text-gray-700 hover:text-blue-600 transition"
-                    >
-                        Contact
-                    </Link>
+                    {token ? (
+                        <>
+                            <span className="font-medium text-[#354936]">
+                                Hi, {name} 👋
+                            </span>
 
-                    <Link
-                        to="/login"
-                        className="text-gray-700 hover:text-blue-600 transition"
-                    >
-                        Login
-                    </Link>
+                            <button
+                                onClick={handleLogout}
+                                className="rounded-full border border-[#354936] px-5 py-2 font-medium text-[#354936] hover:bg-[#354936] hover:text-white"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                to="/login"
+                                className="rounded-full border border-[#354936] px-5 py-2 font-medium text-[#354936] hover:bg-[#354936] hover:text-white"
+                            >
+                                Login
+                            </Link>
 
-                    <Link
-                        to="/register"
-                        className="text-gray-700 hover:text-blue-600 transition"
-                    >
-                        Register
-                    </Link>
+                                                 <Link
+    to="/admin-login"
+    className="rounded-full border border-[#354936] px-5 py-2 font-medium text-[#354936] hover:bg-[#354936] hover:text-white"
+>
+    Admin
+</Link>
+
+                            <Link
+                                to="/register"
+                                className="rounded-full border border-[#354936] px-5 py-2 font-medium text-[#354936] hover:bg-[#354936] hover:text-white"
+                            >
+                                Register
+                            </Link>
+
+       
+                        </>
+                    )}
 
                 </div>
 
@@ -171,4 +91,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

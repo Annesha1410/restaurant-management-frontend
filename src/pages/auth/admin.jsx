@@ -1,87 +1,105 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-const Admin = () => {
+const AdminLogin = () => {
+
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleLogin = async (e) => {
+
+        e.preventDefault();
+
+        try {
+
+            const response = await axios.post(
+                "http://localhost:5000/api/auth/login",
+                {
+                    email,
+                    password
+                }
+            );
+
+            console.log(response.data);
+
+            const token = response.data.token;
+            const role = response.data.data.role;
+
+            if (role !== "admin") {
+
+                alert("This account is not an admin account.");
+
+                return;
+            }
+
+            Cookies.set("token", token);
+            Cookies.set("role", role);
+
+            alert("Admin login successful");
+
+            navigate("/admin/dashboard");
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert(
+                error.response?.data?.message ||
+                "Login failed"
+            );
+        }
+    };
+
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-[#f7f5ef] px-6 py-16">
 
-            {/* Header */}
-            <div className="bg-rose-500 text-white px-8 py-5 flex justify-between items-center">
-                <h1 className="text-2xl font-bold">
-                    TastyBites Admin
+            <div className="mx-auto max-w-md">
+
+                <h1 className="mb-8 text-center text-4xl font-bold text-[#354936]">
+                    Admin Login
                 </h1>
 
-                <button
-                    className="bg-white text-rose-500 px-4 py-2 rounded-lg"
-                    onClick={() => {
-                        localStorage.clear();
-                        window.location.href = "/login";
-                    }}
-                >
-                    Logout
-                </button>
-            </div>
+                <div className="rounded-3xl border border-[#ddd8ca] bg-[#fffdf8] p-8">
 
-            {/* Dashboard */}
-            <div className="p-8">
+                    <form
+                        onSubmit={handleLogin}
+                        className="space-y-5"
+                    >
 
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                    Admin Dashboard
-                </h2>
+                        <input
+                            type="email"
+                            placeholder="Admin Email"
+                            value={email}
+                            onChange={(e) =>
+                                setEmail(e.target.value)
+                            }
+                            required
+                            className="w-full rounded-xl border border-[#ddd8ca] bg-[#f7f5ef] px-4 py-3 outline-none focus:border-[#718568]"
+                        />
 
-                {/* Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) =>
+                                setPassword(e.target.value)
+                            }
+                            required
+                            className="w-full rounded-xl border border-[#ddd8ca] bg-[#f7f5ef] px-4 py-3 outline-none focus:border-[#718568]"
+                        />
 
-                    <div className="bg-white p-6 rounded-xl shadow">
-                        <h3 className="text-xl font-semibold">
-                            Menu Items
-                        </h3>
-
-                        <p className="text-gray-500 mt-2">
-                            Manage restaurant menu
-                        </p>
-
-                        <Link
-                            to="/admin/menu"
-                            className="inline-block mt-4 bg-rose-500 text-white px-4 py-2 rounded-lg"
+                        <button
+                            type="submit"
+                            className="w-full rounded-full bg-[#354936] px-6 py-3 font-medium text-white hover:bg-[#26352a]"
                         >
-                            Manage Menu
-                        </Link>
-                    </div>
+                            Admin Login
+                        </button>
 
-                    <div className="bg-white p-6 rounded-xl shadow">
-                        <h3 className="text-xl font-semibold">
-                            Users
-                        </h3>
-
-                        <p className="text-gray-500 mt-2">
-                            Manage registered users
-                        </p>
-
-                        <Link
-                            to="/admin/users"
-                            className="inline-block mt-4 bg-rose-500 text-white px-4 py-2 rounded-lg"
-                        >
-                            Manage Users
-                        </Link>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-xl shadow">
-                        <h3 className="text-xl font-semibold">
-                            Orders
-                        </h3>
-
-                        <p className="text-gray-500 mt-2">
-                            View and manage orders
-                        </p>
-
-                        <Link
-                            to="/admin/orders"
-                            className="inline-block mt-4 bg-rose-500 text-white px-4 py-2 rounded-lg"
-                        >
-                            Manage Orders
-                        </Link>
-                    </div>
+                    </form>
 
                 </div>
 
@@ -91,4 +109,4 @@ const Admin = () => {
     );
 };
 
-export default Admin;
+export default AdminLogin;
