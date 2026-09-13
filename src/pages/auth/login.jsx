@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -18,22 +19,7 @@ const Login = () => {
         try {
 
             const response = await axios.post(
-                "
-    const handleLogin = async (e) => {
-
-        e.preventDefault();
-
-        try {
-
-            const response = await axios.post(
                 "https://https-github-com-yourusername-restaurant.onrender.com/api/auth/login",
-                {
-                    email,
-                    password
-                }
-            );
-
-            console.log(response.data);",
                 {
                     email: email,
                     password: password
@@ -120,5 +106,4 @@ const Login = () => {
 };
 
 export default Login;
-
 
