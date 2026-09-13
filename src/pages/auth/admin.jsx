@@ -17,7 +17,7 @@ const AdminLogin = () => {
         try {
 
             const response = await axios.post(
-                "https://https-github-com-yourusername-restaurant.onrender.com/api/auth/admin",
+                "https://https-github-com-yourusername-restaurant.onrender.com/api/auth/login",
                 {
                     email,
                     password
